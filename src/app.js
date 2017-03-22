@@ -12,3 +12,15 @@ require('./js/ie10-viewport-bug-workaround.js');
 
 window.axios = axios;
 
+new Vue({
+    el: '#app',
+    data: {
+        name: '',
+        description: ''
+    },
+    methods: {
+        onSubmit(event) {
+            alert('cool!');
+        }
+    }
+});
