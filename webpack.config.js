@@ -2,7 +2,7 @@ let webpack = require('webpack');
 let path = require('path');
 let OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
-let extractCSS = new ExtractTextPlugin('css/[name].css');
+let extractCSS = new ExtractTextPlugin('css/[name].css');const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 
 module.exports = {
     entry: {
@@ -30,10 +30,44 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.less$/i,
                 use: extractCSS.extract({
                     fallback: "style-loader",
-                    use: "css-loader"
+                    use: [
+                        "css-loader",
+                        "less-loader",
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: function () {
+                                    return [
+                                        require('precss'),
+                                        require('autoprefixer')
+                                    ];
+                                }
+                            }
+                        }
+                    ]
+                })
+            },
+            {
+                test: /\.css$/i,
+                use: extractCSS.extract({
+                    fallback: "style-loader",
+                    use: [
+                        "css-loader",
+                        {
+                            loader: "postcss-loader",
+                            options: {
+                                plugins: function () {
+                                    return [
+                                        require('precss'),
+                                        require('autoprefixer')
+                                    ];
+                                }
+                            }
+                        }
+                    ]
                 })
             },
             {
