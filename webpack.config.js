@@ -17,7 +17,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'public/assets'),
         filename: 'js/[name].js',
-        publicPath: './public'
+        publicPath: '/assets/'
     },
     module: {
         loaders: [
