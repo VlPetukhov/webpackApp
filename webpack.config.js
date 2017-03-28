@@ -8,6 +8,7 @@ module.exports = {
     entry: {
         app: "./src/app.js",
         vendor: [
+            './bower_components/jquery/dist/jquery.js',
             'vue',
             'axios',
             './bower_components/bootstrap/dist/js/bootstrap.js',
@@ -85,7 +86,11 @@ module.exports = {
             {
                 test: /\.svg$/,
                 loader: 'file-loader'
-            }
+            },
+            {
+                test: /bootstrap-sass\/assets\/javascripts\//,
+                use: 'imports-loader?jQuery=jquery'
+            },
         ]
 
     },
@@ -96,6 +101,12 @@ module.exports = {
         }
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jquery: "jquery",
+            "window.jQuery": "jquery",
+            jQuery:"jquery"
+        }),
         extractCSS,
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor']
