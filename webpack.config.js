@@ -6,11 +6,14 @@ let extractCSS = new ExtractTextPlugin('css/[name].css');const extractLESS = new
 
 module.exports = {
     entry: {
-        app: "./src/app.js",
+        app: [
+            './src/assets/js/app.js',
+            './src/index.html'
+        ],
         vendor: [
-            './bower_components/jquery/dist/jquery.js',
             'vue',
             'axios',
+            './bower_components/jquery/dist/jquery.js',
             './bower_components/bootstrap/dist/js/bootstrap.js',
             './bower_components/bootstrap/dist/css/bootstrap.css'
         ],
@@ -73,24 +76,32 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2)$/,
-                loader: 'url-loader?limit=10000'
+                loader: 'url-loader?limit=10000&name=fonts/[name].[ext]'
             },
             {
                 test: /\.ttf$/,
-                loader: 'file-loader'
+                loader: 'file-loader?name=fonts/[name].[ext]'
             },
             {
                 test: /\.eot$/,
-                loader: 'file-loader'
+                loader: 'file-loader?name=fonts/[name].[ext]'
             },
             {
                 test: /\.svg$/,
-                loader: 'file-loader'
+                loader: 'file-loader?name=fonts/[name].[ext]'
             },
             {
-                test: /bootstrap-sass\/assets\/javascripts\//,
-                use: 'imports-loader?jQuery=jquery'
-            },
+                test: /\.htm(l)?$/,
+                use: [
+                    'file-loader?name=../[name].[ext]',
+                    'extract-loader',
+                    {
+                    loader: 'html-loader',
+                    options: {
+                        minimize: true
+                    }
+                }]
+            }
         ]
 
     },
@@ -101,12 +112,6 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jquery: "jquery",
-            "window.jQuery": "jquery",
-            jQuery:"jquery"
-        }),
         extractCSS,
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor']
