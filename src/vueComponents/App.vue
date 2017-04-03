@@ -1,10 +1,10 @@
 <template>
-    <div id="app" class="container">
-        <div><h1>Navigation</h1></div>
-        <div class="container app-content">
-            Content
+    <div id="app" class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h1>Learning</h1>
+            </div>
         </div>
-        <div>Footer</div>
     </div>
 </template>
 
@@ -20,5 +20,7 @@ export default {
 </script>
 
 <style lang="less">
-
+body {
+    background: url("../images/backgrounds/gold_scale.png");
+}
 </style>

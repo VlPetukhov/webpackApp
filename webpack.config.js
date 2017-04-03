@@ -89,7 +89,7 @@ module.exports = {
                 loader: 'file-loader?name=fonts/[name].[ext]'
             },
             {
-                test: /\.htm(l)?$/,
+                test: /\.html?$/,
                 use: [
                     'file-loader?name=../[name].[ext]',
                     'extract-loader',
@@ -99,6 +99,19 @@ module.exports = {
                         minimize: true
                     }
                 }]
+            },
+            {
+                test: /backgrounds\/[\S]+\.(jpe?g|png|gif)$/i,
+                loaders: [
+                    'file-loader?name=../images/backgrounds/[name].[ext]'
+                ]
+            },
+            {
+                test: /images\/[\S]+\.(jpe?g|png|gif)$/i,
+                loaders: [
+                    'file-loader?name=../images/[name].[ext]',
+                    'image-webpack-loader?bypassOnDebug&optimizationLevel=7'
+                ]
             },
             {
                 test: /bootstrap\/js\//,
