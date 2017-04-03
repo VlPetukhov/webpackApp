@@ -13,7 +13,7 @@ module.exports = {
         vendor: [
             'vue',
             'axios',
-            'bootstrap-loader'
+            'bootstrap-webpack'
         ],
     },
     output: {
@@ -101,8 +101,8 @@ module.exports = {
                 }]
             },
             {
-                test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
-                loader: 'imports-loader?jQuery=jquery'
+                test: /bootstrap\/js\//,
+                loader: 'imports?jQuery=jquery'
             },
             {
                 test: /\.vue$/,
@@ -143,7 +143,6 @@ if (process.env.NODE_ENV === 'production') {
             }
         })
     );
-
     module.exports.plugins.push(
         new webpack.DefinePlugin({
             'process.env': {
