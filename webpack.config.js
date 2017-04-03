@@ -2,20 +2,18 @@ let webpack = require('webpack');
 let path = require('path');
 let OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
-let extractCSS = new ExtractTextPlugin('css/[name].css');const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
+let extractCSS = new ExtractTextPlugin('css/[name].css');
 
 module.exports = {
     entry: {
         app: [
-            './src/assets/js/app.js',
+            './src/main.js',
             './src/index.html'
         ],
         vendor: [
             'vue',
             'axios',
-            './bower_components/jquery/dist/jquery.js',
-            './bower_components/bootstrap/dist/js/bootstrap.js',
-            './bower_components/bootstrap/dist/css/bootstrap.css'
+            'bootstrap-loader'
         ],
     },
     output: {
@@ -101,14 +99,21 @@ module.exports = {
                         minimize: true
                     }
                 }]
+            },
+            {
+                test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
+                loader: 'imports-loader?jQuery=jquery'
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
             }
         ]
 
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.common.js',
-            jquery: "bower_components/jquery/dist/jquery.js",
+            'vue$': 'vue/dist/vue.common.js'
         }
     },
     plugins: [
