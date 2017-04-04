@@ -2,13 +2,13 @@ import Vue from 'vue';
 import axios from 'axios';
 
 //linking css
-require('./assets/css/ie10-viewport-bug-workaround.css');
-require('./assets/css/sticky-footer-navbar.css');
-require('./assets/less/main.less');
-require('./assets/less/main.less');
+require('./css/ie10-viewport-bug-workaround.css');
+require('./css/sticky-footer-navbar.css');
+require('./less/main.less');
+require('./less/main.less');
 
 //linking js
-require('./assets/js/ie10-viewport-bug-workaround.js');
+require('./js/ie10-viewport-bug-workaround.js');
 
 window.axios = axios;
 

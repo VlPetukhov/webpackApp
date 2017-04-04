@@ -13,13 +13,14 @@ module.exports = {
         vendor: [
             'vue',
             'axios',
-            'bootstrap-webpack'
+            'bootstrap',
+            'bootstrap/dist/css/bootstrap.css'
         ],
     },
     output: {
-        path: path.resolve(__dirname, 'public/assets'),
+        path: path.resolve(__dirname, 'public'),
         filename: 'js/[name].js',
-        publicPath: '/assets/'
+        publicPath: '/'
     },
     module: {
         loaders: [
@@ -91,7 +92,7 @@ module.exports = {
             {
                 test: /\.html?$/,
                 use: [
-                    'file-loader?name=../[name].[ext]',
+                    'file-loader?name=[name].[ext]',
                     'extract-loader',
                     {
                     loader: 'html-loader',
@@ -101,16 +102,19 @@ module.exports = {
                 }]
             },
             {
-                test: /backgrounds\/[\S]+\.(jpe?g|png|gif)$/i,
-                loaders: [
-                    'file-loader?name=../images/backgrounds/[name].[ext]'
+                test: /images(\\|\/)[^\/\s]+\.(jpe?g|png|gif)$/i,
+                exclude: /backgrounds(\\|\/)([^\/\s]+)\.(jpe?g|png|gif)$/i,
+                use: [
+                    'file-loader?name=images/[name].[ext]',
+                    // 'url-loader?name=images/[name].[ext]',
+                    'image-webpack-loader?bypassOnDebug&optimizationLevel=7'
                 ]
             },
             {
-                test: /images\/[\S]+\.(jpe?g|png|gif)$/i,
-                loaders: [
-                    'file-loader?name=../images/[name].[ext]',
-                    'image-webpack-loader?bypassOnDebug&optimizationLevel=7'
+                test: /backgrounds(\\|\/)[^\/\s]+\.(jpe?g|png|gif)$/i,
+                use: [
+                    'file-loader?name=images/backgrounds/[name].[ext]',
+                    // 'url-loader?name=images/backgrounds/[name].[ext]'
                 ]
             },
             {
@@ -143,6 +147,11 @@ module.exports = {
                 }
             },
             canPrint: true
+        }),
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery',
+            jquery: 'jquery'
         })
     ]
 };
