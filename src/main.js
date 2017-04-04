@@ -10,9 +10,11 @@ require('./js/ie10-viewport-bug-workaround.js');
 window.axios = axios;
 
 import App from "./vueComponents/App.vue";
+import Store from './vueStore';
 
 new Vue({
     el: '#app',
+    Store,
     data: {
 
     },
