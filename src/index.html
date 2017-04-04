@@ -42,13 +42,12 @@
         *, :after, :before {
             box-sizing: border-box;
         }
-        .loading-shader {
+        #loading-shader {
             color: rgba(0, 0, 0, 0.25);
             position: absolute;
             z-index: 1000;
             min-height: 100%;
             width: 100%;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQECBoDTBmpyQAAAl9JREFUSMd9lsly3DAMRLsh/v/P5pCLB50DVspTkYtFWaKIpYHH4d+/fwQJkgP6QPpA+oG7Q3K4C5IgARL6ImOYESRhZiAf0B6QD8AHhAEkDuQQBKBm9SZSzAAhAMy3XEZqbVx6DQdEHMkBZCSoEYvKAABYusBXJGwLubEEwdMhA0Ac6ZMvHYLH/M4NAIIAdT25r0gr8GljsZ448p9YUC/g6U1nLlJXhr6ZUb13CLU4HAeI4/rJhaNHfbS3mrTc3mcMI5ZK3/n2yD+v73I1WRIDZKaLLX5Eu9Na6Xp7SRz5imCXitJ7GkiCtDSUmWDpqNFxRTe3wvG3wB1IRBEGHhhtIuGKuFuAY0iZwrxOatMZFFuF2JQPSAPsuSKZqlCKzck2dBXnUadmNxqjm3eq8n5CdsANMIHu6RmTDrwMWbVEPODq4ookB+5CqFRGYU/7lyMSe9+D5Xl18Ny3g0tQXo1aRcjFnQk4DNlSID1ehlbfDDm0GJdjI4a/e+qYlcjlFV/A8/ZoylvDuxrNO645tj7lPTqKxSIUGqou+WLVC6ibdJkJoYxwEUQNClCeTacFRw4AtyFpN3k7DgHHjG+WdkqiA9iUvsn7v0h5nTWHfAZ02rNW/i/3+tnu6pvNXOITx8yyaArzuDgk4Av08HXzQZFNj4E4tLMwT8QhxsH3/3eeU4aM5NIAWtLCqrqeENUjt2Ia9BsNv2ztMq9ur79iHS36pDVpLMThL46mvwyxe3AQ08S2Hsjj4YBMJCzBSFAxf6PqAJVff1iUFsW0M6EHrjcYR29eB2f9XLJvG6//67N/qQuKtQPJfboAAAAASUVORK5CYII=');
         }
         @-webkit-keyframes spin {
             0% {
@@ -70,6 +69,18 @@
                 transform: rotate(360deg);
             }
         }
+        #loading-shader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4QQECBoDTBmpyQAAAl9JREFUSMd9lsly3DAMRLsh/v/P5pCLB50DVspTkYtFWaKIpYHH4d+/fwQJkgP6QPpA+oG7Q3K4C5IgARL6ImOYESRhZiAf0B6QD8AHhAEkDuQQBKBm9SZSzAAhAMy3XEZqbVx6DQdEHMkBZCSoEYvKAABYusBXJGwLubEEwdMhA0Ac6ZMvHYLH/M4NAIIAdT25r0gr8GljsZ448p9YUC/g6U1nLlJXhr6ZUb13CLU4HAeI4/rJhaNHfbS3mrTc3mcMI5ZK3/n2yD+v73I1WRIDZKaLLX5Eu9Na6Xp7SRz5imCXitJ7GkiCtDSUmWDpqNFxRTe3wvG3wB1IRBEGHhhtIuGKuFuAY0iZwrxOatMZFFuF2JQPSAPsuSKZqlCKzck2dBXnUadmNxqjm3eq8n5CdsANMIHu6RmTDrwMWbVEPODq4ookB+5CqFRGYU/7lyMSe9+D5Xl18Ny3g0tQXo1aRcjFnQk4DNlSID1ehlbfDDm0GJdjI4a/e+qYlcjlFV/A8/ZoylvDuxrNO645tj7lPTqKxSIUGqou+WLVC6ibdJkJoYxwEUQNClCeTacFRw4AtyFpN3k7DgHHjG+WdkqiA9iUvsn7v0h5nTWHfAZ02rNW/i/3+tnu6pvNXOITx8yyaArzuDgk4Av08HXzQZFNj4E4tLMwT8QhxsH3/3eeU4aM5NIAWtLCqrqeENUjt2Ia9BsNv2ztMq9ur79iHS36pDVpLMThL46mvwyxe3AQ08S2Hsjj4YBMJCzBSFAxf6PqAJVff1iUFsW0M6EHrjcYR29eB2f9XLJvG6//67N/qQuKtQPJfboAAAAASUVORK5CYII=');
+        }
+        #loading-text {
+            opacity: 0;
+            transition-duration: 1s;
+        }
         .loading {
             display: inline-block;
             border-radius: 50%;
@@ -83,7 +94,12 @@
     </style>
 </head>
 <body>
-<div class="loading-shader">
+<div id="loading-shader">
+    <script type="text/javascript">
+        setTimeout(function(){
+            document.getElementById('loading-text').style.opacity=1.0;
+        }, 2000);
+    </script>
     <h1 id="loading-text" class="text-center">Loading <i class="loading"></i></h1>
 </div>
 <div id="app"></div>

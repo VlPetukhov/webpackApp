@@ -23,8 +23,9 @@ new Vue({
         window.Vue = this;
     },
     mounted() {
-        $('div.loading-shader').fadeOut('slow', function(){
-            $('div.loading-shader').detach();
+        let shader = $('#loading-shader');
+        shader.fadeOut('slow', function(){
+            shader.detach();
         });
     },
     render: h => h(App)
