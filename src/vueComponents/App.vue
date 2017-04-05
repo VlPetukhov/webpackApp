@@ -4,6 +4,8 @@
             <div class="panel-background"></div>
             <div class="panel-body">
                 <h1>Learning</h1>
+                <hr />
+                <p>It's cool!</p>
             </div>
         </div>
     </div>
@@ -34,8 +36,11 @@ export default {
         margin-top: 50px;
         position:relative;
         overflow: hidden;
-        background-color: rgba(255,255,255,0.6);
+        background-color: rgba(255,255,255,0.4);
         border-color: #fff;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        transition: box-shadow .3s ease;
     }
 
     .panel.blur-background .panel-background {
