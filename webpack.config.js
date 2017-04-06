@@ -3,6 +3,7 @@ let path = require('path');
 let OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let extractCSS = new ExtractTextPlugin('css/[name].css');
+let autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: {
@@ -44,8 +45,7 @@ module.exports = {
                             options: {
                                 plugins: function () {
                                     return [
-                                        require('precss'),
-                                        require('autoprefixer')
+                                        autoprefixer
                                     ];
                                 }
                             }
@@ -64,8 +64,7 @@ module.exports = {
                             options: {
                                 plugins: function () {
                                     return [
-                                        require('precss'),
-                                        require('autoprefixer')
+                                        autoprefixer
                                     ];
                                 }
                             }
@@ -123,7 +122,7 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
             }
         ]
 
@@ -134,7 +133,13 @@ module.exports = {
         }
     },
     plugins: [
-        extractCSS,
+        extractCSS,new webpack.LoaderOptionsPlugin({
+            vue: {
+                loaders: {
+                    scss: 'style!css!less'
+                }
+            }
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor']
         }),

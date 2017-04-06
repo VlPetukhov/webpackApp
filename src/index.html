@@ -97,7 +97,10 @@
 <div id="loading-shader">
     <script type="text/javascript">
         setTimeout(function(){
-            document.getElementById('loading-text').style.opacity=1.0;
+            var loading = document.getElementById('loading-text');
+            if (loading) {
+                loading.style.opacity=1.0;
+            }
         }, 2000);
     </script>
     <h1 id="loading-text" class="text-center">Loading <i class="loading"></i></h1>
